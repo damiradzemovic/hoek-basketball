@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HOeK Basketball</title>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --card:#121a33;
+      --text:#f2f5ff;
+      --muted:#b9c2dd;
+      --accent:#ffb300;
+      --accent2:#35d0ba;
+      --border:rgba(255,255,255,0.12);
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 700px at 20% 0%, rgba(255,179,0,0.14), transparent 60%),
+                  radial-gradient(900px 600px at 90% 10%, rgba(53,208,186,0.14), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+    a{color:inherit}
+    .wrap{max-width:1100px; margin:0 auto; padding:24px}
+    header{
+      position:sticky;
+      top:0;
+      z-index:10;
+      background: rgba(11,16,32,0.75);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:14px 24px;
+      max-width:1100px;
+      margin:0 auto;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      text-decoration:none;
+      font-weight:800;
+      letter-spacing:0.4px;
+    }
+    .logo{
+      width:40px;
+      height:40px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background: linear-gradient(135deg, rgba(255,179,0,0.95), rgba(53,208,186,0.85));
+      box-shadow: var(--shadow);
+      color:#071021;
+      font-weight:900;
+    }
+    .menu{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      justify-content:flex-end;
+    }
+    .menu a{
+      text-decoration:none;
+      color:var(--muted);
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid transparent;
+    }
+    .menu a:hover{
+      color:var(--text);
+      border-color: var(--border);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .hero{
+      padding:34px 0 10px 0;
+    }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    .card{
+      background: rgba(18,26,51,0.72);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:20px;
+    }
+    .hero h1{
+      margin:0 0 10px 0;
+      font-size: clamp(28px, 4.2vw, 44px);
+      line-height:1.15;
+    }
+    .hero p{
+      margin:0 0 16px 0;
+      color:var(--muted);
+      font-size: 16px;
+    }
+    .ctaRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:12px;
+    }
+    .btn{
+      display:inline-block;
+      padding:10px 14px;
+      border-radius:14px;
+      text-decoration:none;
+      font-weight:700;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+    }
+    .btnPrimary{
+      border-color: rgba(255,179,0,0.55);
+      background: rgba(255,179,0,0.12);
+    }
+    .btnPrimary:hover{
+      background: rgba(255,179,0,0.18);
+    }
+    .btn:hover{
+      border-color: rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.06);
+    }
+    .badgeRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:12px;
+    }
+    .badge{
+      font-size:13px;
+      color:var(--muted);
+      border:1px solid var(--border);
+      border-radius:999px;
+      padding:6px 10px;
+      background: rgba(255,255,255,0.03);
+    }
+    .highlight{
+      border-color: rgba(53,208,186,0.55);
+      background: rgba(53,208,186,0.10);
+    }
+
+    section{padding:16px 0}
+    h2{
+      margin:0 0 10px 0;
+      font-size:22px;
+      letter-spacing:0.2px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+    }
+    .col6{grid-column: span 6}
+    .col4{grid-column: span 4}
+    .col8{grid-column: span 8}
+    .col12{grid-column: span 12}
+
+    .list{
+      margin:10px 0 0 0;
+      padding:0 0 0 18px;
+      color:var(--muted);
+    }
+    .list li{margin:6px 0}
+
+    .infoBox{
+      border-radius:16px;
+      border:1px solid var(--border);
+      padding:14px;
+      background: rgba(255,255,255,0.03);
+    }
+    .kv{
+      display:grid;
+      grid-template-columns: 160px 1fr;
+      gap:8px 12px;
+      margin-top:10px;
+      color:var(--muted);
+    }
+    .kv b{
+      color:var(--text);
+      font-weight:700;
+    }
+
+    footer{
+      margin-top:24px;
+      border-top:1px solid var(--border);
+      color:var(--muted);
+      padding:22px 0 36px 0;
+      font-size:13px;
+    }
+
+    @media (max-width: 900px){
+      .heroGrid{grid-template-columns: 1fr}
+      .col6,.col4,.col8{grid-column: span 12}
+      .kv{grid-template-columns: 1fr}
+      .menu{justify-content:flex-start}
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="nav">
+      <a class="brand" href="#top" aria-label="HOeK Basketball Startseite">
+        <div class="logo">HB</div>
+        <div>HOeK Basketball</div>
+      </a>
+      <nav class="menu" aria-label="Navigation">
+        <a href="#angebot">Angebot</a>
+        <a href="#training">Training</a>
+        <a href="#verein">Verein</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="#mitgliedschaft">Mitgliedschaft</a>
+        <a href="#impressum">Impressum</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="wrap">
+    <section class="hero">
+      <div class="heroGrid">
+        <div class="card">
+          <h1>Basketball für Kinder, Jugendliche und Gemeinschaft</h1>
+          <p>
+            HOeK Basketball steht für Bewegung, Freude und Zusammenhalt in der Region.
+            Bei uns dürfen Kinder ausprobieren, sich entwickeln und als Team wachsen.
+          </p>
+
+          <div class="ctaRow">
+            <a class="btn btnPrimary" href="#kontakt">Schnuppern anfragen</a>
+            <a class="btn" href="#training">Trainingszeiten</a>
+            <a class="btn" href="#mitgliedschaft">Mitglied werden</a>
+          </div>
+
+          <div class="badgeRow" aria-label="Merkmale">
+            <span class="badge highlight">Kinder und Jugendförderung</span>
+            <span class="badge">Ohne Leistungsdruck</span>
+            <span class="badge">Respekt und Fairness</span>
+            <span class="badge">Einfach mitmachen</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Kurzinformation</h2>
+          <div class="kv">
+            <b>Standort</b><span>Kriegstetten und Umgebung</span>
+            <b>Ziel</b><span>Sportpädagogische Förderung und Integration</span>
+            <b>Für wen</b><span>Kinder und Jugendliche</span>
+            <b>Kontakt</b><span><a href="#kontakt">siehe Kontaktbereich</a></span>
+          </div>
+          <p style="margin:14px 0 0 0; color:var(--muted)">
+            Tipp: Ersetze die Platzhalter unten bei Kontakt, Ort und Impressum mit deinen echten Angaben.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="angebot">
+      <div class="grid">
+        <div class="col8 card">
+          <h2>Angebot</h2>
+          <p style="margin:0; color:var(--muted)">
+            Wir bauen ein Angebot auf, das Kindern Freude an Bewegung vermittelt, koordinative Grundlagen stärkt
+            und soziale Kompetenzen im Team fördert.
+          </p>
+
+          <h3 style="margin:14px 0 8px 0">BasKIDSball</h3>
+          <div class="infoBox">
+            <div class="kv">
+              <b>Format</b><span>Mitmachen, spielen, lernen</span>
+              <b>Fokus</b><span>Koordination, Ballgefühl, Team, Spass</span>
+              <b>Stil</b><span>Ermutigend, klar, respektvoll</span>
+            </div>
+          </div>
+
+          <ul class="list">
+            <li>Bewegungsspiele und Reaktionsübungen</li>
+            <li>Dribbling und Ballkontrolle auf spielerische Art</li>
+            <li>Koordination, Lauftechnik, Gleichgewicht</li>
+            <li>Teamspiele, Fairness, Kommunikation</li>
+          </ul>
+        </div>
+
+        <div class="col4 card">
+          <h2>Werte</h2>
+          <ul class="list">
+            <li>Respekt und Sicherheit</li>
+            <li>Gemeinschaft vor Ego</li>
+            <li>Fördern statt selektieren</li>
+            <li>Klare Regeln, freundlicher Ton</li>
+          </ul>
+
+          <div class="infoBox" style="margin-top:12px">
+            <b>Hinweis</b>
+            <p style="margin:6px 0 0 0; color:var(--muted)">
+              Wenn du J S, Trainerlizenz oder ähnliche Angaben ergänzen möchtest, kannst du das hier platzieren.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="training">
+      <div class="grid">
+        <div class="col6 card">
+          <h2>Trainingszeiten</h2>
+          <p style="margin:0; color:var(--muted)">
+            Trage hier deine finalen Zeiten ein. Beispielwerte kannst du einfach ersetzen.
+          </p>
+          <div class="infoBox" style="margin-top:12px">
+            <div class="kv">
+              <b>Dienstag</b><span>17:30 bis 19:00 Uhr</span>
+              <b>Mittwoch</b><span>16:30 bis 17:30 Uhr</span>
+              <b>Altersgruppe</b><span>Kinder und Jugendliche</span>
+              <b>Eintritt</b><span>Schnuppern nach Anmeldung möglich</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col6 card">
+          <h2>Ort</h2>
+          <p style="margin:0; color:var(--muted)">
+            Ergänze hier die genaue Halle und Adresse.
+          </p>
+          <div class="infoBox" style="margin-top:12px">
+            <div class="kv">
+              <b>Turnhalle</b><span>Turnhalle Kriegstetten</span>
+              <b>Adresse</b><span>Platzhalterstrasse 1, 0000 Kriegstetten</span>
+              <b>Anreise</b><span>Parkplätze vorhanden, ÖV nach Möglichkeit nutzen</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="verein">
+      <div class="grid">
+        <div class="col12 card">
+          <h2>Über den Verein</h2>
+          <p style="margin:0; color:var(--muted)">
+            HOeK Basketball wurde gegründet, um Kindern und Jugendlichen in den Gemeinden rund um Kriegstetten
+            ein niedrigschwelliges, integratives Sportangebot zu bieten. Wir fördern Bewegung, Selbstvertrauen
+            und Zugehörigkeit, und wir schaffen einen Rahmen, in dem jedes Kind Fortschritte machen kann.
+          </p>
+          <div class="grid" style="margin-top:14px">
+            <div class="col4 infoBox">
+              <b>Für Eltern</b>
+              <p style="margin:6px 0 0 0; color:var(--muted)">
+                Zuschauen ist willkommen. Bei Anlässen gibt es je nach Organisation Kaffee und Kuchen.
+              </p>
+            </div>
+            <div class="col4 infoBox">
+              <b>Für Kinder</b>
+              <p style="margin:6px 0 0 0; color:var(--muted)">
+                Spiele, Ballgefühl und Team, ohne Druck. Regeln sind klar, damit es fair bleibt.
+              </p>
+            </div>
+            <div class="col4 infoBox">
+              <b>Für Helfende</b>
+              <p style="margin:6px 0 0 0; color:var(--muted)">
+                Unterstützung bei Training, Anlässen oder Organisation ist sehr willkommen.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="kontakt">
+      <div class="grid">
+        <div class="col6 card">
+          <h2>Kontakt</h2>
+          <p style="margin:0; color:var(--muted)">
+            Melde dich für Fragen, Schnuppertraining oder Mitarbeit.
+          </p>
+          <div class="infoBox" style="margin-top:12px">
+            <div class="kv">
+              <b>Ansprechperson</b><span>Vorname Nachname</span>
+              <b>E Mail</b><span><a href="mailto:info@hoekk-basketball.ch">info@hoekk-basketball.ch</a></span>
+              <b>Telefon</b><span><a href="tel:+41000000000">+41 00 000 00 00</a></span>
+              <b>Social</b><span><a href="#" rel="noopener">Instagram oder Facebook Link</a></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col6 card">
+          <h2>Kontaktformular</h2>
+          <p style="margin:0; color:var(--muted)">
+            Falls GitHub Pages nur statisch ist und das Absenden nicht geht, nutze stattdessen eine E Mail Adresse
+            oder integriere später einen externen Formdienst.
+          </p>
+
+          <form class="infoBox" style="margin-top:12px" action="#" method="post">
+            <label style="display:block; margin-bottom:8px">
+              Name<br />
+              <input type="text" name="name" required style="width:100%; margin-top:6px; padding:10px; border-radius:12px; border:1px solid var(--border); background:rgba(0,0,0,0.18); color:var(--text)" />
+            </label>
+
+            <label style="display:block; margin-bottom:8px">
+              E Mail<br />
+              <input type="email" name="email" required style="width:100%; margin-top:6px; padding:10px; border-radius:12px; border:1px solid var(--border); background:rgba(0,0,0,0.18); color:var(--text)" />
+            </label>
+
+            <label style="display:block; margin-bottom:10px">
+              Nachricht<br />
+              <textarea name="message" rows="4" required style="width:100%; margin-top:6px; padding:10px; border-radius:12px; border:1px solid var(--border); background:rgba(0,0,0,0.18); color:var(--text)"></textarea>
+            </label>
+
+            <button type="submit" class="btn btnPrimary" style="cursor:pointer">
+              Absenden
+            </button>
+            <p style="margin:10px 0 0 0; color:var(--muted); font-size:13px">
+              Hinweis: Bei GitHub Pages funktioniert dieses Formular ohne zusätzlichen Dienst nicht.
+              Du kannst später z.B. ein externes Formular verlinken.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="mitgliedschaft">
+      <div class="grid">
+        <div class="col12 card">
+          <h2>Mitgliedschaft</h2>
+          <p style="margin:0; color:var(--muted)">
+            Trage hier deine Beiträge, Regeln und Abläufe ein.
+          </p>
+
+          <div class="grid" style="margin-top:14px">
+            <div class="col4 infoBox">
+              <b>Beitrag</b>
+              <ul class="list">
+                <li>Kinderbeitrag: CHF Platzhalter</li>
+                <li>Familienbeitrag: CHF Platzhalter</li>
+                <li>Schnuppern: kostenlos nach Anmeldung</li>
+              </ul>
+            </div>
+            <div class="col4 infoBox">
+              <b>Was enthalten ist</b>
+              <ul class="list">
+                <li>Regelmässige Trainings</li>
+                <li>Vereinskommunikation</li>
+                <li>Anlässe und Gemeinschaft</li>
+              </ul>
+            </div>
+            <div class="col4 infoBox">
+              <b>Regeln</b>
+              <ul class="list">
+                <li>Respekt gegenüber allen</li>
+                <li>Sicherheit in der Halle</li>
+                <li>Eltern informieren bei Abwesenheit</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="impressum">
+      <div class="grid">
+        <div class="col6 card">
+          <h2>Impressum</h2>
+          <div class="infoBox">
+            <div class="kv">
+              <b>Verein</b><span>HOeK Basketball</span>
+              <b>Adresse</b><span>Platzhalterstrasse 1, 0000 Ort</span>
+              <b>E Mail</b><span>info@hoekk-basketball.ch</span>
+              <b>Vertretung</b><span>Vorname Nachname</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col6 card">
+          <h2>Datenschutz</h2>
+          <p style="margin:0; color:var(--muted)">
+            Wir verwenden Kontaktdaten nur zur Bearbeitung deiner Anfrage und zur Vereinskommunikation.
+            Daten werden nicht verkauft. Ergänze hier deine detaillierte Datenschutzerklärung, falls nötig.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap" style="padding:0">
+        <div style="display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; align-items:center">
+          <span>© <span id="year"></span> HOeK Basketball</span>
+          <span><a href="#top">Nach oben</a></span>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
